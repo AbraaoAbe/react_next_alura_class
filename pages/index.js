@@ -1,7 +1,6 @@
 import React from "react";
 import config from "../config.json"
 import styled from "styled-components";
-import { CSSReset } from "../src/components/CSSReset";
 import { StyledTimeline } from "../src/components/Timeline";
 import Menu from "../src/components/Menu";
 
@@ -9,16 +8,13 @@ import Menu from "../src/components/Menu";
 
 
 function HomePage() {
-    const estilosDePagina = { 
-        //backgroundColor: 'red' 
-    };
+    
 
-    const [valorDoFiltro, setValorDoFiltro] = React.useState("Angular");
+    const [valorDoFiltro, setValorDoFiltro] = React.useState("");
 
     return (
         <>
-            <CSSReset/>
-            <div style={estilosDePagina} >
+            <div  >
             <Menu valorDoFiltro={valorDoFiltro} setValorDoFiltro={setValorDoFiltro}/>
             <Header banner = {config.banner} />
             <TimeLine searchValue={valorDoFiltro} playlists = {config.playlists}/>
@@ -32,6 +28,9 @@ function HomePage() {
 
 
 const StyledHeader = styled.div`
+    
+    background-color: ${({ theme }) => theme.backgroundLevel1};
+
     .user-info {
         display: flex;
         align-items: center;
@@ -43,6 +42,11 @@ const StyledHeader = styled.div`
         width: 80px;
         height: 80px;
         border-radius: 50%;
+    }
+
+    a{
+        color: ${({ theme }) => theme.textColorBase};
+        text-decoration: none;
     }
 
 `;
@@ -58,12 +62,14 @@ function Header(props){
         <StyledHeader>
             <StyledBanner bg = {config.bg}/>
             <section className="user-info">
-                <img src={`https://github.com/${config.github}.png`}  className="profile-img"/>
+                <img src={`https://github.com/${config.github}.png`}  className="profile-img" />
                 <div>
                     <h2>
-                        {config.author}
+                        <a href={`https://github.com/${config.github}`}>
+                            {config.author}
+                        </a>
                     </h2>
-                    <p>
+                    <p >
                         {config.job}
                     </p> 
                 </div>
